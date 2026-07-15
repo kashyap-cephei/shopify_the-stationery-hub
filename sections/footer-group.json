@@ -14,47 +14,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "group_AdNEDy": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "group_x8d8fh": {
           "type": "group",
           "name": "Footer Section One",
@@ -132,11 +91,149 @@
           "block_order": [
             "ai_gen_block_eeb144e_LdAtRy"
           ]
+        },
+        "group_AdNEDy": {
+          "type": "group",
+          "name": "Footer Section Two",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "ai_gen_block_39f3f3c_af3zgh": {
+              "type": "ai_gen_block_39f3f3c",
+              "settings": {
+                "heading": "Customer Support",
+                "heading_size": 20,
+                "heading_weight": 600,
+                "heading_spacing": 24,
+                "link_1_text": "Shipping and Delivery",
+                "link_1_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "link_2_text": "Return Policy",
+                "link_2_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "link_3_text": "Cancellation",
+                "link_3_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "link_4_text": "Terms of Service",
+                "link_4_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "link_5_text": "Privacy Policy",
+                "link_5_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "font_size": 18,
+                "font_weight": 500,
+                "link_spacing": 20,
+                "alignment": "left",
+                "padding": 20,
+                "background_color": "#ffffff",
+                "text_color": "#000000"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "ai_gen_block_39f3f3c_af3zgh"
+          ]
+        },
+        "group_zkXD4R": {
+          "type": "group",
+          "name": "Footer Section Three",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "ai_gen_block_eadb53d_4NqcGV": {
+              "type": "ai_gen_block_eadb53d",
+              "settings": {
+                "heading": "Stay Connected",
+                "heading_font": "serif",
+                "heading_size": 48,
+                "heading_color": "#000000",
+                "facebook_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "instagram_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "pinterest_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "twitter_url": "https://the-stationery-hub-pqdrr185.myshopify.com/",
+                "icon_size": 36,
+                "icon_color": "#000000",
+                "icon_spacing": 32,
+                "heading_icon_gap": 40,
+                "vertical_spacing": 40,
+                "horizontal_spacing": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "ai_gen_block_eadb53d_4NqcGV"
+          ]
         }
       },
       "block_order": [
+        "group_x8d8fh",
         "group_AdNEDy",
-        "group_x8d8fh"
+        "group_zkXD4R"
       ],
       "custom_css": [],
       "name": "Footer",
