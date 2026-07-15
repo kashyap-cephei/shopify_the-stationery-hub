@@ -1,0 +1,1351 @@
+/* ============================================
+   NEST by Arpit Agarwal — Custom Theme Overrides
+   Inspired Design for Stationery Brand
+   ============================================ */
+
+/* ----- 1. GLOBAL STYLES ----- */
+body {
+  font-family: var(--font-body--family);
+  color: var(--color-foreground);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions on images */
+img {
+  transition: transform 0.4s var(--ease-out-quad), opacity 0.3s ease;
+}
+
+/* ----- 2. TYPOGRAPHY ----- */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+h2, .h2 {
+  font-size: var(--font-size--h2);
+  line-height: 1.15;
+  margin-bottom: 0.5em;
+}
+
+/* Section headings (like "Shop by Collection") */
+.section-resource-list .group-block-content h2,
+.collection-list-section h2,
+.shop-by-collection h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h4);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--color-foreground);
+}
+
+/* ----- 3. BUTTONS ----- */
+/* Primary button - NEST style: filled, earthy tone */
+.button-primary,
+.btn-primary,
+.button--primary,
+button[type="submit"].btn,
+a[href].button-primary {
+  background: var(--color-primary-button-background, var(--color-foreground));
+  color: var(--color-primary-button-text, var(--color-background));
+  border: none;
+  border-radius: 0;
+  padding: 14px 32px;
+  font-family: var(--font-body--family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.button-primary:hover,
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* Secondary button - NEST style: outlined */
+.button-secondary,
+.btn-secondary,
+.button--secondary {
+  background: transparent;
+  color: var(--color-foreground);
+  border: 1px solid var(--color-foreground);
+  border-radius: 0;
+  padding: 13px 31px;
+  font-family: var(--font-body--family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.button-secondary:hover {
+  background: var(--color-foreground);
+  color: var(--color-background);
+}
+
+/* ----- 4. ANNOUNCEMENT BAR ----- */
+.announcement-bar {
+  background: var(--color-foreground);
+  color: var(--color-background);
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  padding-block: 10px;
+}
+
+.announcement-bar a {
+  color: var(--color-background);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ----- 5. HEADER ----- */
+.header-component {
+  border-bottom: none;
+}
+
+/* Ensure header always has white background */
+.header-section .header-component {
+  background: #FFFFFF;
+}
+
+/* Announcement bar - NEST: dark bg, white text */
+.header-announcements {
+  background: #1A1A1A;
+  color: #fff;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.header-announcements a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Header row styling */
+.header__row--top {
+  padding-top: 12px;
+  padding-bottom: 4px;
+}
+
+.header__row--bottom {
+  padding-top: 4px;
+  padding-bottom: 16px;
+}
+
+/* Logo - centered text-based, NEST style */
+.header-logo {
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  gap: 2px;
+}
+
+/* Tagline below logo (uses shop.tagline) */
+.header-logo .shopify-challenge__message,
+.header-logo + .header-tagline,
+.header-logo ~ *:not(.header-logo__image-container) {
+  display: none;
+}
+
+/* If there's a tagline display via the theme */
+.header-tagline,
+.logo-tagline {
+  display: block;
+  font-family: var(--font-body--family);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  opacity: 0.7;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Navigaton links - centered, clean */
+.header__row--bottom .menu-list {
+  justify-content: center;
+}
+
+.header__row--bottom .menu-list__list {
+  justify-content: center;
+}
+
+/* Override theme's dimming hover effect on header columns */
+@media (hover: hover) {
+  .header__column:has(header-menu:hover),
+  .header__column:has(.header-actions__action:hover),
+  .header__column:has(.header__icon--menu:hover) {
+    header-menu:not(:hover),
+    .header-actions__action:not(:hover),
+    .header__icon--menu:not(:hover) {
+      opacity: 1 !important;
+    }
+  }
+}
+
+/* Utility icons row (search, account, cart) */
+.header__row--top .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header__row--top .header-actions__action {
+  color: var(--color-foreground);
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.header__row--top .header-actions__action:hover {
+  opacity: 1;
+}
+
+/* Cart bubble */
+.cart-bubble {
+  background: var(--color-foreground);
+  color: var(--color-background);
+}
+
+/* Sticky header */
+.header-section--sticky .header-component {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* Mobile hamburger */
+.header-drawer__toggle {
+  color: var(--color-foreground);
+}
+
+/* Drawer / mobile menu styling */
+.header-drawer {
+  background: #FFFFFF;
+}
+
+.header-drawer .header-drawer__nav-item {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ----- 6. SLIDESHOW / HERO ----- */
+.slideshow-section,
+.hero-wrapper {
+  position: relative;
+}
+
+/* NEST-style gradient overlay */
+.hero__overlay,
+.slideshow-slide__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.4) 0%,
+    rgba(0,0,0,0.1) 50%,
+    transparent 100%
+  );
+}
+
+/* Hero/slide content styling */
+.hero__content-wrapper,
+.slideshow-slide__content {
+  padding: 40px;
+}
+
+.hero__content-wrapper h1,
+.hero__content-wrapper h2,
+.slideshow-slide__content h1,
+.slideshow-slide__content h2 {
+  font-family: var(--font-heading--family);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 0.25em;
+}
+
+.hero__content-wrapper h3,
+.slideshow-slide__content h3 {
+  font-family: var(--font-heading--family);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+.hero__content-wrapper p,
+.slideshow-slide__content p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 32em;
+}
+
+.hero__content-wrapper .button-primary,
+.slideshow-slide__content .button-primary {
+  border: 1px solid #fff;
+  color: #fff;
+  background: transparent;
+  margin-top: 8px;
+}
+
+.hero__content-wrapper .button-primary:hover,
+.slideshow-slide__content .button-primary:hover {
+  background: #fff;
+  color: var(--color-foreground);
+}
+
+/* Slideshow arrows */
+slideshow-arrows .slideshow-control {
+  color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+slideshow-arrows .slideshow-control:hover {
+  opacity: 1;
+}
+
+/* Slideshow pagination dots */
+.slideshow-pagination .slideshow-control {
+  background: rgba(255,255,255,0.4);
+}
+
+.slideshow-pagination .slideshow-control[aria-current="true"] {
+  background: #fff;
+}
+
+/* ----- 7. COLLECTION CARDS ----- */
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.collection-card:hover img {
+  transform: scale(1.06);
+}
+
+.collection-card .collection-card__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Title on image overlay - NEST style */
+.collection-card .collection-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+  z-index: 2;
+}
+
+.collection-card .collection-card__title {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h4);
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Title below image - NEST style for some sections */
+.collection-card--below .collection-card__title {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h5);
+  font-weight: 400;
+  color: var(--color-foreground);
+  padding-top: 12px;
+  text-align: center;
+}
+
+.collection-card__link {
+  text-decoration: none;
+}
+
+/* ----- 8. PRODUCT CARDS ----- */
+.product-card {
+  background: var(--color-background);
+  border: 1px solid rgba(43,40,37,0.08);
+  border-radius: 0;
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.product-card .product-card__image-wrapper {
+  overflow: hidden;
+}
+
+.product-card:hover .product-card__image-wrapper img {
+  transform: scale(1.03);
+}
+
+.product-card .product-card__info {
+  padding: 16px;
+}
+
+.product-card .product-card__title {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-foreground);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.product-card .product-card__price {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  opacity: 0.8;
+}
+
+.product-card .price {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+}
+
+/* ----- 9. MEDIA WITH CONTENT ----- */
+.media-with-content__content {
+  padding: 48px;
+}
+
+.media-with-content__content h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h3);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.media-with-content__content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-foreground);
+  opacity: 0.8;
+  max-width: 28em;
+}
+
+.media-with-content__content .button-primary {
+  margin-top: 8px;
+}
+
+/* ----- 10. NEWSLETTER SECTION ----- */
+.newsletter-section {
+  padding: 80px 24px;
+  text-align: center;
+  background: var(--color-background);
+}
+
+.newsletter-section h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h3);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-section p {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  max-width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletter-section .newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 420px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.newsletter-section .newsletter-form input[type="email"] {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--color-foreground);
+  border-right: none;
+  padding: 12px 16px;
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  background: transparent;
+  color: var(--color-foreground);
+  outline: none;
+}
+
+.newsletter-section .newsletter-form input[type="email"]::placeholder {
+  color: var(--color-foreground);
+  opacity: 0.4;
+}
+
+.newsletter-section .newsletter-form button {
+  background: var(--color-foreground);
+  color: var(--color-background);
+  border: 1px solid var(--color-foreground);
+  padding: 12px 24px;
+  font-family: var(--font-body--family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.newsletter-section .newsletter-form button:hover {
+  opacity: 0.85;
+}
+
+/* ----- 11. FOOTER ----- */
+.footer {
+  background: #FFFFFF;
+  color: var(--color-foreground);
+  padding-block: 48px;
+}
+
+.footer a {
+  color: var(--color-foreground);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.3s;
+  font-size: 0.875rem;
+}
+
+.footer a:hover {
+  opacity: 0.7;
+}
+
+.footer h3, .footer h4 {
+  font-family: var(--font-heading--family);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  margin-bottom: 1rem;
+}
+
+.footer .menu-list__link {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  padding: 4px 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer .menu-list__link:hover {
+  opacity: 0.7;
+}
+
+.footer .footer__newsletter input[type="email"] {
+  background: transparent;
+  border: 1px solid var(--color-foreground);
+  color: var(--color-foreground);
+  padding: 10px 14px;
+  font-size: 0.875rem;
+}
+
+.footer .footer__newsletter input[type="email"]::placeholder {
+  color: rgba(43,40,37,0.4);
+}
+
+.footer .footer__newsletter button {
+  background: var(--color-foreground);
+  color: #FFFFFF;
+  border: 1px solid var(--color-foreground);
+  padding: 10px 18px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Footer social icons */
+.footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-foreground);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.footer .social-icons a svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-foreground);
+}
+
+.footer .social-icons a:hover {
+  background: var(--color-foreground);
+}
+
+.footer .social-icons a:hover svg {
+  fill: #FFFFFF;
+}
+
+/* Footer utilities / bottom bar */
+.footer-utilities {
+  background: #FFFFFF;
+  color: var(--color-foreground);
+  font-size: 0.75rem;
+  border-top: 1px solid rgba(43,40,37,0.15);
+}
+
+.footer-utilities a {
+  color: var(--color-foreground);
+  text-decoration: none;
+  font-size: 0.75rem;
+}
+
+.footer-utilities a:hover {
+  opacity: 0.7;
+}
+
+/* Hide powered by Shopify and policy links in bottom bar */
+.footer-utilities [class*="powered"],
+.footer-utilities [class*="policy"],
+.footer-utilities [class*="shopify"] {
+  display: none !important;
+}
+.footer .menu-block h3,
+.footer .menu-block h4,
+.footer .footer__menu h3,
+.footer .footer__menu h4 {
+  display: none !important;
+}
+
+/* "Stay Connected" heading - large serif style */
+.footer .footer__menu:last-child h3,
+.footer .footer__menu:last-child h4 {
+  display: block !important;
+  font-family: var(--font-heading--family);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  margin-bottom: 1rem;
+}
+
+.footer .footer__menu:last-child .menu-list__link {
+  text-decoration: none;
+  padding: 0;
+}
+
+/* ----- 12. REVIEWS / TESTIMONIALS ----- */
+.reviews-section {
+  padding: 64px 24px;
+  text-align: center;
+  background: var(--color-background);
+}
+
+.reviews-section h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h3);
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.reviews-section .review-card {
+  border: 1px solid rgba(43,40,37,0.08);
+  padding: 24px;
+  text-align: left;
+}
+
+.reviews-section .review-card__stars {
+  color: var(--color-foreground);
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.reviews-section .review-card__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.reviews-section .review-card__author {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+/* ----- 13. MEDIA COVERAGE ----- */
+.media-coverage {
+  padding: 0;
+  position: relative;
+}
+
+.media-coverage img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- 14. RESPONSIVE ----- */
+
+/* Tablet (750px - 989px) */
+@media screen and (max-width: 989px) {
+  .hero__content-wrapper,
+  .slideshow-slide__content {
+    padding: 32px 24px;
+  }
+
+  .hero__content-wrapper h1,
+  .slideshow-slide__content h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .media-with-content__content {
+    padding: 32px 24px;
+  }
+}
+
+/* Mobile (<750px) */
+@media screen and (max-width: 749px) {
+  /* Collection cards stack */
+  .collection-list .resource-list,
+  .collection-list-section .resource-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+  }
+
+  /* Product grid 2 columns */
+  .product-list .resource-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+  }
+
+  /* Hero/slideshow */
+  .hero__content-wrapper,
+  .slideshow-slide__content {
+    padding: 24px 16px;
+  }
+
+  .hero__content-wrapper h1,
+  .slideshow-slide__content h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero__content-wrapper h3,
+  .slideshow-slide__content h3 {
+    font-size: 0.8125rem;
+  }
+
+  /* Buttons smaller on mobile */
+  .button-primary,
+  .btn-primary,
+  .button-secondary,
+  .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+  }
+
+  /* Media with content stacks vertically */
+  .media-with-content {
+    grid-template-areas: 'media' 'content' !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .media-with-content .media-block {
+    min-height: 30svh;
+  }
+
+  .media-with-content__content {
+    padding: 24px 16px;
+  }
+
+  /* Newsletter */
+  .newsletter-section {
+    padding: 48px 16px;
+  }
+
+  .newsletter-section .newsletter-form {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .newsletter-section .newsletter-form input[type="email"] {
+    border-right: 1px solid var(--color-foreground);
+  }
+
+  .footer .footer-content {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px;
+  }
+
+  /* Reviews */
+  .reviews-section {
+    padding: 40px 16px;
+  }
+
+  .reviews-section .reviews-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  /* Media coverage */
+  .media-coverage {
+    padding: 0;
+  }
+}
+
+/* Small mobile (<480px) */
+@media screen and (max-width: 480px) {
+  .collection-list .resource-list,
+  .collection-list-section .resource-list {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .product-list .resource-list {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .footer .footer-content {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ----- 15. NEST-SPECIFIC LAYOUT HELPERS ----- */
+
+/* Full-width banner section */
+.nest-banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.nest-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nest-banner .nest-banner__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  z-index: 2;
+}
+
+.nest-banner .nest-banner__content h2 {
+  font-family: var(--font-heading--family);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #fff;
+  font-weight: 400;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.nest-banner .nest-banner__content p {
+  color: rgba(255,255,255,0.9);
+  max-width: 28em;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 3-column collection cards */
+.collection-grid--3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Section spacing */
+.section-spacing {
+  padding-block: 48px;
+}
+
+.section-spacing-lg {
+  padding-block: 64px;
+}
+
+/* Divider line (NEST uses subtle lines between sections) */
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(43,40,37,0.06);
+  margin: 0;
+}
+
+/* Center-aligned section heading */
+.section-heading-center {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.section-heading-center h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h4);
+  font-weight: 400;
+}
+
+/* ----- 13. AESTHETIC BUTTONS ----- */
+.aesthetic-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 64px 24px;
+}
+
+.aesthetic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-foreground);
+  background: transparent;
+  color: var(--color-foreground);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.aesthetic-btn:hover {
+  background: var(--color-foreground);
+  color: var(--color-background);
+}
+
+/* ----- 14. FOOTER AESTHETIC ----- */
+.footer {
+  background: #FFFFFF;
+  color: var(--color-foreground);
+  padding-block: 48px;
+}
+
+.footer a {
+  color: var(--color-foreground);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.3s;
+  font-size: 0.875rem;
+}
+
+.footer a:hover {
+  opacity: 0.7;
+}
+
+.footer h3, .footer h4 {
+  font-family: var(--font-heading--family);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  margin-bottom: 1rem;
+}
+
+.footer .menu-list__link {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  padding: 4px 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer .menu-list__link:hover {
+  opacity: 0.7;
+}
+
+/* Hide Explore/Help headings - NEST shows only links */
+.footer .menu-block h3,
+.footer .menu-block h4,
+.footer .footer__menu h3,
+.footer .footer__menu h4 {
+  display: none !important;
+}
+
+/* "Stay Connected" heading - large serif style */
+.footer .footer__menu:last-child h3,
+.footer .footer__menu:last-child h4 {
+  display: block !important;
+  font-family: var(--font-heading--family);
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-foreground);
+  margin-bottom: 1rem;
+}
+
+.footer .footer__menu:last-child .menu-list__link {
+  text-decoration: none;
+  padding: 0;
+}
+
+/* Footer social icons */
+.footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-foreground);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.footer .social-icons a svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-foreground);
+}
+
+.footer .social-icons a:hover {
+  background: var(--color-foreground);
+}
+
+.footer .social-icons a:hover svg {
+  fill: #FFFFFF;
+}
+
+/* Footer utilities / bottom bar */
+.footer-utilities {
+  background: #FFFFFF;
+  color: var(--color-foreground);
+  font-size: 0.75rem;
+  border-top: 1px solid rgba(43,40,37,0.15);
+}
+
+.footer-utilities a {
+  color: var(--color-foreground);
+  text-decoration: none;
+  font-size: 0.75rem;
+}
+
+.footer-utilities a:hover {
+  opacity: 0.7;
+}
+
+/* Hide powered by Shopify and policy links in bottom bar */
+.footer-utilities [class*="powered"],
+.footer-utilities [class*="policy"],
+.footer-utilities [class*="shopify"] {
+  display: none !important;
+}
+
+/* ----- 15. FEATURED VIDEO SECTION ----- */
+.featured-video-product {
+  background: var(--color-background);
+}
+
+.featured-video-product .media-with-content__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-video-product .media-with-content__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-video-product .media-with-content__content {
+  padding: 48px;
+}
+
+/* ----- 16. THREE BOOK CARDS ----- */
+.three-book-cards {
+  padding: 64px 24px;
+}
+
+.three-book-cards .collection-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.three-book-cards .collection-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.three-book-cards .collection-card:hover img {
+  transform: scale(1.05);
+}
+
+.three-book-cards .collection-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  color: white;
+}
+
+.three-book-cards .collection-card__title {
+  font-family: var(--font-heading--family);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.three-book-cards .collection-card__btn {
+  display: inline-block;
+  padding: 8px 24px;
+  background: white;
+  color: var(--color-foreground);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.three-book-cards .collection-card__btn:hover {
+  background: var(--color-foreground);
+  color: white;
+}
+
+/* ----- 17. SHOP BY COLLECTION RIGHT ----- */
+.shop-by-collection-right {
+  padding: 64px 24px;
+}
+
+.shop-by-collection-right .section-header {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.shop-by-collection-right .section-header h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h4);
+  font-weight: 400;
+}
+
+.shop-by-collection-right .collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.shop-by-collection-right .collection-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.shop-by-collection-right .collection-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.shop-by-collection-right .collection-card:hover img {
+  transform: scale(1.05);
+}
+
+.shop-by-collection-right .collection-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  color: white;
+}
+
+.shop-by-collection-right .collection-card__title {
+  font-family: var(--font-heading--family);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* ----- 18. EXPLORE MORE SECTION ----- */
+.explore-more {
+  padding: 64px 24px;
+}
+
+.explore-more .section-header {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.explore-more .section-header h2 {
+  font-family: var(--font-heading--family);
+  font-size: var(--font-size--h4);
+  font-weight: 400;
+}
+
+.explore-more .collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.explore-more .collection-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.explore-more .collection-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.explore-more .collection-card:hover img {
+  transform: scale(1.05);
+}
+
+.explore-more .collection-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  color: white;
+}
+
+.explore-more .collection-card__title {
+  font-family: var(--font-heading--family);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* ----- 19. NEWSLETTER ----- */
+.newsletter-section {
+  padding: 80px 24px;
+  text-align: center;
+  background: var(--color-background);
+}
+
+.newsletter-section h2 {
+  font-family:var(--font-heading--family);
+  font-size:var(--font-size--h3);
+  font-weight:400;
+  margin-bottom:0.75rem;
+}
+
+.newsletter-section p {
+  font-size:1rem;
+  opacity:0.7;
+  margin-bottom:1.5rem;
+  max-width:30em;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.newsletter-form {
+  display:flex;
+  gap:0;
+  max-width:420px;
+  margin:0 auto;
+  justify-content:center;
+}
+
+.newsletter-form input[type="email"] {
+  flex:1;
+  min-width:0;
+  border:1px solid var(--color-foreground);
+  border-right:none;
+  padding:12px 16px;
+  font-family:var(--font-body--family);
+  font-size:0.875rem;
+  background:transparent;
+  color:var(--color-foreground);
+  outline:none;
+}
+
+.newsletter-form button {
+  background:var(--color-foreground);
+  color:var(--color-background);
+  border:1px solid var(--color-foreground);
+  padding:12px 24px;
+  font-family:var(--font-body--family);
+  font-size:0.8125rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+/* ----- 20. RESPONSIVE ----- */
+@media (max-width: 768px) {
+  .aesthetic-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .aesthetic-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .three-book-cards .collection-grid,
+  .shop-by-collection-right .collection-grid,
+  .explore-more .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer .footer__menu {
+    margin-bottom: 24px;
+  }
+  
+  .footer .footer__menu:last-child {
+    margin-bottom: 0;
+  }
+}
