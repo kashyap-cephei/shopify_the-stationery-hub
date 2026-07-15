@@ -1,6 +1,371 @@
+{% doc %}
+  @prompt
+    Create a clean minimalist footer column aligned to the left.
+    
+    Add a vertical list of navigation links with generous spacing.
+    
+    Links:
+    - Retail Presence
+    - About Us
+    - Media
+    - Blog
+    - Contact Us
+    - withLovefromNorthEast
+    - Etsy.com
+    - iTokri.com
+    - amazon.in
+    - flipkart.com
+    
+    Use black text on a white background.
+    Font size around 18px.
+    Medium font weight.
+    Left aligned.
+    Maintain consistent spacing between each item.
+    No borders, icons, or background colors.
+    Keep the design premium and minimal.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-footer-nav-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-footer-nav__list-{{ ai_gen_id }} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.link_spacing }}px;
+  }
+
+  .ai-footer-nav__item-{{ ai_gen_id }} {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-footer-nav__link-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    background-color: {{ block.settings.background_color }};
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    text-align: {{ block.settings.text_alignment }};
+    text-decoration: none;
+    display: block;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-footer-nav__link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-footer-nav-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<nav class="ai-footer-nav-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <ul class="ai-footer-nav__list-{{ ai_gen_id }}">
+    {% if block.settings.link_1_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_1_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_1_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_2_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_2_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_2_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_3_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_3_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_3_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_4_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_4_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_4_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_5_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_5_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_5_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_6_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_6_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_6_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_7_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_7_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_7_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_8_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_8_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_8_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_9_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_9_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_9_text }}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.link_10_text != blank %}
+      <li class="ai-footer-nav__item-{{ ai_gen_id }}">
+        <a href="{{ block.settings.link_10_url }}" class="ai-footer-nav__link-{{ ai_gen_id }}">
+          {{ block.settings.link_10_text }}
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Footer navigation column",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "Retail Presence"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text",
+      "default": "About Us"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 text",
+      "default": "Media"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_4_text",
+      "label": "Link 4 text",
+      "default": "Blog"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_5_text",
+      "label": "Link 5 text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "link_5_url",
+      "label": "Link 5 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_6_text",
+      "label": "Link 6 text",
+      "default": "withLovefromNorthEast"
+    },
+    {
+      "type": "url",
+      "id": "link_6_url",
+      "label": "Link 6 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_7_text",
+      "label": "Link 7 text",
+      "default": "Etsy.com"
+    },
+    {
+      "type": "url",
+      "id": "link_7_url",
+      "label": "Link 7 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_8_text",
+      "label": "Link 8 text",
+      "default": "iTokri.com"
+    },
+    {
+      "type": "url",
+      "id": "link_8_url",
+      "label": "Link 8 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_9_text",
+      "label": "Link 9 text",
+      "default": "amazon.in"
+    },
+    {
+      "type": "url",
+      "id": "link_9_url",
+      "label": "Link 9 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_10_text",
+      "label": "Link 10 text",
+      "default": "flipkart.com"
+    },
+    {
+      "type": "url",
+      "id": "link_10_url",
+      "label": "Link 10 URL"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "link_spacing",
+      "label": "Link spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer navigation column"
+    }
+  ]
+}
 {% endschema %}
