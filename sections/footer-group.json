@@ -14,128 +14,136 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "menu_8tJbUk": {
-          "type": "menu",
-          "settings": {
-            "menu": "footer-explore",
-            "heading": "",
-            "menu_spacing": 12,
-            "show_as_accordion": false,
-            "accordion_icon": "caret",
-            "accordion_dividers": false,
-            "heading_preset": "h3",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "menu_jRmAQi": {
-          "type": "menu",
-          "settings": {
-            "menu": "footer-help",
-            "heading": "",
-            "menu_spacing": 12,
-            "show_as_accordion": false,
-            "accordion_icon": "caret",
-            "accordion_dividers": false,
-            "heading_preset": "h3",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "group_hAzkCn": {
+        "group_AdNEDy": {
           "type": "group",
+          "name": "t:names.group",
           "settings": {
             "content_direction": "column",
-            "vertical_on_mobile": false,
+            "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 24,
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
             "width": "fill",
-            "custom_width": 35,
+            "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
-            "height": "fill",
+            "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
             "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
-            "padding-block-end": 4,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_x8d8fh": {
+          "type": "group",
+          "name": "Footer Section One",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_jBr8nr": {
-              "type": "text",
+            "ai_gen_block_eeb144e_LdAtRy": {
+              "type": "ai_gen_block_eeb144e",
               "settings": {
-                "text": "<p>Stay Connected</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-primary--family)",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 10,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "social_links_JBkCiP": {
-              "type": "social-links",
-              "name": "t:names.social_media_links",
-              "settings": {
-                "facebook_url": "https://facebook.com/nestbyarpitagarwal",
-                "instagram_url": "https://instagram.com/nestbyarpitagarwal",
-                "pinterest_url": "https://pinterest.com",
-                "twitter_url": "https://x.com/NESTbyAA"
+                "link_1_text": "Retail Presence",
+                "link_1_url": "",
+                "link_2_text": "About Us",
+                "link_2_url": "",
+                "link_3_text": "Media",
+                "link_3_url": "",
+                "link_4_text": "Blog",
+                "link_4_url": "",
+                "link_5_text": "Contact Us",
+                "link_5_url": "",
+                "link_6_text": "withLovefromNorthEast",
+                "link_6_url": "",
+                "link_7_text": "Etsy.com",
+                "link_7_url": "",
+                "link_8_text": "iTokri.com",
+                "link_8_url": "",
+                "link_9_text": "amazon.in",
+                "link_9_url": "",
+                "link_10_text": "flipkart.com",
+                "link_10_url": "",
+                "text_color": "#000000",
+                "background_color": "#FFFFFF",
+                "font_size": 18,
+                "font_weight": "500",
+                "text_alignment": "left",
+                "link_spacing": 16,
+                "desktop_width_percent": 100
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "text_jBr8nr",
-            "social_links_JBkCiP"
+            "ai_gen_block_eeb144e_LdAtRy"
           ]
         }
       },
       "block_order": [
-        "menu_8tJbUk",
-        "menu_jRmAQi",
-        "group_hAzkCn"
+        "group_AdNEDy",
+        "group_x8d8fh"
       ],
+      "custom_css": [],
       "name": "Footer",
       "settings": {
         "section_width": "page-width",
         "gap": 12,
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "padding-block-start": 48,
         "padding-block-end": 24
       }
@@ -147,6 +155,7 @@
           "type": "footer-copyright",
           "settings": {
             "show_powered_by": true,
+            "text_color": "",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -156,6 +165,7 @@
           "type": "footer-policy-list",
           "name": "t:names.policy_list",
           "settings": {
+            "text_color": "",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -169,8 +179,9 @@
       "settings": {
         "section_width": "page-width",
         "gap": 24,
+        "background_color": "#ffffff",
         "divider_thickness": 1,
-        "background_color": "#FFFFFF",
+        "divider_color": "",
         "padding-block-start": 20,
         "padding-block-end": 18
       }
