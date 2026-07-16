@@ -1,6 +1,665 @@
+{% doc %}
+  @prompt
+    Create a premium "Follow our story on Instagram" section for a luxury stationery and lifestyle brand.
+    
+    Layout:
+    - Display a centered section heading:
+      "Follow our story on Instagram"
+    - Below the heading, display an Instagram-style media grid.
+    - Show 10 media cards arranged in 5 columns × 2 rows on desktop.
+    - Maintain equal spacing (16–20px) between cards.
+    - Full-width section with generous horizontal padding.
+    
+    Media Cards:
+    - Each card should support either an image or a video.
+    - Use a portrait aspect ratio (4:5).
+    - Images and videos should completely fill the card using object-fit: cover.
+    - Videos should autoplay, loop, muted, and have no controls.
+    - Entire card should be clickable.
+    
+    Hover Effect:
+    - Slight image/video zoom (1.05x).
+    - Smooth 300ms transition.
+    - Optional subtle dark overlay with Instagram icon appearing on hover.
+    
+    Theme Settings:
+    - Section heading editable.
+    - Support multiple media blocks.
+    - Each block should include:
+      - Image OR Shopify Video
+      - Instagram URL
+      - Alt text
+    - Clicking a card opens the Instagram post in a new tab.
+    
+    Responsive:
+    - Desktop: 5 columns.
+    - Tablet: 3 columns.
+    - Mobile: 2 columns with proper spacing.
+    
+    Style:
+    Luxury, editorial, clean, minimal, inspired by premium Instagram galleries with generous white space. No borders, no shadows, and all content editable through the Shopify Theme Editor.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-instagram-gallery-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 80px 40px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-instagram-gallery__container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-instagram-gallery__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 60px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    font-family: var(--font-heading-family);
+    letter-spacing: 0.02em;
+  }
+
+  .ai-instagram-gallery__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-instagram-gallery__card-{{ ai_gen_id }} {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .ai-instagram-gallery__link-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+  }
+
+  .ai-instagram-gallery__media-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-instagram-gallery__image-{{ ai_gen_id }},
+  .ai-instagram-gallery__video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-instagram-gallery__link-{{ ai_gen_id }}:hover .ai-instagram-gallery__image-{{ ai_gen_id }},
+  .ai-instagram-gallery__link-{{ ai_gen_id }}:hover .ai-instagram-gallery__video-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-instagram-gallery__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-instagram-gallery__link-{{ ai_gen_id }}:hover .ai-instagram-gallery__overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-instagram-gallery__icon-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    color: {{ block.settings.icon_color }};
+  }
+
+  .ai-instagram-gallery__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-instagram-gallery__placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-instagram-gallery__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-instagram-gallery-{{ ai_gen_id }} {
+      padding: 60px 30px;
+    }
+
+    .ai-instagram-gallery__heading-{{ ai_gen_id }} {
+      margin-bottom: 40px;
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-instagram-gallery__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.8 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-instagram-gallery-{{ ai_gen_id }} {
+      padding: 50px 20px;
+    }
+
+    .ai-instagram-gallery__heading-{{ ai_gen_id }} {
+      margin-bottom: 30px;
+      font-size: calc({{ block.settings.heading_size }}px * 0.6);
+    }
+
+    .ai-instagram-gallery__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.6 }}px;
+    }
+
+    .ai-instagram-gallery__icon-{{ ai_gen_id }} {
+      width: 32px;
+      height: 32px;
+    }
+  }
+{% endstyle %}
+
+<instagram-gallery-{{ ai_gen_id }} class="ai-instagram-gallery-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-instagram-gallery__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-instagram-gallery__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div class="ai-instagram-gallery__grid-{{ ai_gen_id }}">
+      {% for i in (1..10) %}
+        {% liquid
+          assign image_key = 'image_' | append: i
+          assign video_key = 'video_' | append: i
+          assign url_key = 'instagram_url_' | append: i
+          assign alt_key = 'alt_text_' | append: i
+
+          assign current_image = block.settings[image_key]
+          assign current_video = block.settings[video_key]
+          assign current_url = block.settings[url_key]
+          assign current_alt = block.settings[alt_key]
+        %}
+
+        <div class="ai-instagram-gallery__card-{{ ai_gen_id }}">
+          {% if current_url != blank %}
+            <a
+              href="{{ current_url }}"
+              class="ai-instagram-gallery__link-{{ ai_gen_id }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="{{ current_alt | default: 'View on Instagram' }}"
+            >
+          {% else %}
+            <div class="ai-instagram-gallery__link-{{ ai_gen_id }}">
+          {% endif %}
+
+            <div class="ai-instagram-gallery__media-wrapper-{{ ai_gen_id }}">
+              {% if current_video != blank %}
+                {{
+                  current_video
+                  | video_tag:
+                    autoplay: true,
+                    loop: true,
+                    muted: true,
+                    controls: false,
+                    class: 'ai-instagram-gallery__video-' | append: ai_gen_id
+                }}
+              {% elsif current_image != blank %}
+                <img
+                  src="{{ current_image | image_url: width: 800 }}"
+                  alt="{{ current_alt | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="1000"
+                  class="ai-instagram-gallery__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-instagram-gallery__placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                  <div class="ai-instagram-gallery__empty-state-{{ ai_gen_id }}">
+                    Add image or video
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+
+            {% if block.settings.show_overlay %}
+              <div class="ai-instagram-gallery__overlay-{{ ai_gen_id }}">
+                <svg
+                  class="ai-instagram-gallery__icon-{{ ai_gen_id }}"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17.5 6.5H17.51"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            {% endif %}
+
+          {% if current_url != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</instagram-gallery-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class InstagramGallery{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.videos = this.querySelectorAll('.ai-instagram-gallery__video-{{ ai_gen_id }}');
+        this.setupVideoPlayback();
+      }
+
+      setupVideoPlayback() {
+        this.videos.forEach((video) => {
+          video.setAttribute('playsinline', '');
+          video.play().catch(() => {});
+        });
+      }
+    }
+
+    customElements.define('instagram-gallery-{{ ai_gen_id }}', InstagramGallery{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Instagram gallery",
+  "tag": null,
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow our story on Instagram"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2B2825"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid spacing",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FBF9F5"
+    },
+    {
+      "type": "header",
+      "content": "Hover effect"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show overlay on hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 0.8,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Media card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_1",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_1",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_2",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_2",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_3",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_3",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_4",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_4",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_5",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_5",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_6",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_6",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_7",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_7",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_8",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_8",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_9",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_9",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_9",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_9",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "header",
+      "content": "Media card 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_10",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video_10",
+      "label": "Video"
+    },
+    {
+      "type": "text",
+      "id": "alt_text_10",
+      "label": "Alt text",
+      "default": "Instagram post"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url_10",
+      "label": "Instagram URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram gallery"
+    }
+  ]
+}
 {% endschema %}
