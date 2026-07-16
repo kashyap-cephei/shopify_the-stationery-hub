@@ -1,6 +1,402 @@
+{% doc %}
+  @prompt
+    Create a premium "Featured Category" section for a luxury stationery and lifestyle brand.
+    
+    Layout:
+    - Display a section heading aligned to the left.
+    - Below the heading, display 2 large category cards side by side.
+    - Each card should occupy 50% width with a 20px gap.
+    - Full-width section with generous horizontal padding.
+    
+    Category Card:
+    - Large portrait image with approximately a 4:5 aspect ratio.
+    - Images should fill the card using object-fit: cover.
+    - Display the category title below the image, left aligned.
+    - No overlays, buttons, borders, or shadows.
+    - The entire image and title should act as a single clickable link.
+    
+    Theme Settings:
+    - Section heading editable.
+    - Support multiple category blocks (minimum 2).
+    - Each block should include:
+      - Category image
+      - Category title
+      - Destination URL / Collection / Page
+    - Clicking anywhere on the card navigates to the assigned link.
+    
+    Hover Effect:
+    - Smooth image zoom (scale 1.03).
+    - Cursor changes to pointer.
+    - Optional subtle fade transition (300ms).
+    
+    Responsive:
+    - Desktop: 2 columns.
+    - Tablet: 2 columns.
+    - Mobile: Single-column stacked layout.
+    
+    Style:
+    Minimal, editorial, luxury, handcrafted aesthetic with generous white space and elegant typography. All content should be editable through the Shopify Theme Editor., i do need only one raw with two columns, colth columns will be image and share 50-50% width with 20-30 gap in between and both image hight will be 850px or configrable
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-category-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 60px 40px;
+    background-color: {{ block.settings.section_background_color }};
+  }
+
+  .ai-featured-category-container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-featured-category-heading-{{ ai_gen_id }} {
+    font-family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    font-weight: {{ settings.type_heading_font.weight }};
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 40px 0;
+    text-align: left;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-featured-category-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: {{ block.settings.column_gap }}px;
+  }
+
+  .ai-featured-category-card-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-featured-category-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-2px);
+  }
+
+  .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    margin-bottom: 16px;
+  }
+
+  .ai-featured-category-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-featured-category-card-{{ ai_gen_id }}:hover .ai-featured-category-image-{{ ai_gen_id }} {
+    transform: scale(1.03);
+  }
+
+  .ai-featured-category-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    position: relative;
+  }
+
+  .ai-featured-category-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  .ai-featured-category-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-featured-category-title-{{ ai_gen_id }} {
+    font-family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
+    font-weight: {{ settings.type_heading_font.weight }};
+    font-size: {{ block.settings.category_title_size }}px;
+    color: {{ block.settings.category_title_color }};
+    margin: 0;
+    text-align: left;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+  }
+
+  .ai-featured-category-card-{{ ai_gen_id }}:hover .ai-featured-category-title-{{ ai_gen_id }} {
+    color: {{ block.settings.category_title_hover_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-featured-category-{{ ai_gen_id }} {
+      padding: 50px 30px;
+    }
+
+    .ai-featured-category-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+      margin-bottom: 30px;
+    }
+
+    .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+      height: calc({{ block.settings.image_height }}px * 0.7);
+    }
+
+    .ai-featured-category-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.category_title_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-category-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-featured-category-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+      margin-bottom: 24px;
+    }
+
+    .ai-featured-category-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+      height: calc({{ block.settings.image_height }}px * 0.6);
+    }
+
+    .ai-featured-category-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.category_title_size }}px * 0.85);
+    }
+  }
+{% endstyle %}
+
+<div class="ai-featured-category-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-featured-category-container-{{ ai_gen_id }}">
+    {% if block.settings.section_heading != blank %}
+      <h2 class="ai-featured-category-heading-{{ ai_gen_id }}">
+        {{ block.settings.section_heading }}
+      </h2>
+    {% endif %}
+
+    <div class="ai-featured-category-grid-{{ ai_gen_id }}">
+      <a
+        href="{{ block.settings.category_1_link }}"
+        class="ai-featured-category-card-{{ ai_gen_id }}"
+      >
+        <div class="ai-featured-category-image-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.category_1_image %}
+            <img
+              src="{{ block.settings.category_1_image | image_url: width: 1000 }}"
+              alt="{{ block.settings.category_1_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.category_1_image.width }}"
+              height="{{ block.settings.category_1_image.height }}"
+              class="ai-featured-category-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-featured-category-image-placeholder-{{ ai_gen_id }}">
+              {{ 'collection-apparel-1' | placeholder_svg_tag }}
+              <div class="ai-featured-category-empty-state-{{ ai_gen_id }}">
+                Add category 1 image
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.category_1_title != blank %}
+          <h3 class="ai-featured-category-title-{{ ai_gen_id }}">
+            {{ block.settings.category_1_title }}
+          </h3>
+        {% endif %}
+      </a>
+
+      <a
+        href="{{ block.settings.category_2_link }}"
+        class="ai-featured-category-card-{{ ai_gen_id }}"
+      >
+        <div class="ai-featured-category-image-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.category_2_image %}
+            <img
+              src="{{ block.settings.category_2_image | image_url: width: 1000 }}"
+              alt="{{ block.settings.category_2_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.category_2_image.width }}"
+              height="{{ block.settings.category_2_image.height }}"
+              class="ai-featured-category-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-featured-category-image-placeholder-{{ ai_gen_id }}">
+              {{ 'collection-apparel-1' | placeholder_svg_tag }}
+              <div class="ai-featured-category-empty-state-{{ ai_gen_id }}">
+                Add category 2 image
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.category_2_title != blank %}
+          <h3 class="ai-featured-category-title-{{ ai_gen_id }}">
+            {{ block.settings.category_2_title }}
+          </h3>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Featured category",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Explore our collections"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2B2825"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 850
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Gap between columns",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Category cards"
+    },
+    {
+      "type": "range",
+      "id": "category_title_size",
+      "label": "Title size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "category_title_color",
+      "label": "Title color",
+      "default": "#2B2825"
+    },
+    {
+      "type": "color",
+      "id": "category_title_hover_color",
+      "label": "Title hover color",
+      "default": "#C4A484"
+    },
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Background color",
+      "default": "#FBF9F5"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_1_title",
+      "label": "Title",
+      "default": "Notebooks & Journals"
+    },
+    {
+      "type": "url",
+      "id": "category_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "category_2_title",
+      "label": "Title",
+      "default": "Writing Instruments"
+    },
+    {
+      "type": "url",
+      "id": "category_2_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured category"
+    }
+  ]
+}
 {% endschema %}
