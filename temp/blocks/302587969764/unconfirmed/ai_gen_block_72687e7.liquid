@@ -1,6 +1,654 @@
+{% doc %}
+  @prompt
+    Create a premium full-width hero carousel for a luxury stationery and lifestyle brand.
+    
+    Requirements:
+    
+    - Full-width image slider.
+    - Display 2 slides.
+    - One image per slide.
+    - Large background images with a subtle dark overlay to improve text readability.
+    - Center the content both horizontally and vertically.
+    - Heading should use an elegant serif font around 56–64px in white.
+    - Add a rounded white button below the heading with black text saying "Explore".
+    - Button should have a pill shape with smooth hover animation.
+    - Show previous and next navigation arrows on the left and right edges.
+    - Display pagination dots at the bottom center of the slider.
+    - Enable autoplay every 5 seconds with a smooth fade transition.
+    - Pause autoplay when the user hovers over the slider.
+    - Fully responsive for desktop, tablet, and mobile.
+    - Maintain a luxurious, clean, minimal aesthetic with generous white space.
+    
+    Each slide should allow editing of:
+    - Background image
+    - Heading
+    - Button text
+    - Button link
+    
+    Default Slides:
+    
+    Slide 1
+    Heading: Kingkhap Collection
+    Button: Explore
+    
+    Slide 2
+    Heading: Handmade Stationery Collection
+    Button: Explore
+    
+    All images, text, links, autoplay timing, and overlay opacity should be editable through Shopify Theme Editor.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hero-carousel-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+  }
+
+  .ai-hero-carousel__slides-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+  }
+
+  .ai-hero-carousel__slide-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity {{ block.settings.transition_duration }}s ease-in-out;
+  }
+
+  .ai-hero-carousel__slide-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+  }
+
+  .ai-hero-carousel__slide-image-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-hero-carousel__slide-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-hero-carousel__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-hero-carousel__placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  .ai-hero-carousel__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-hero-carousel__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+    z-index: 2;
+  }
+
+  .ai-hero-carousel__content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  .ai-hero-carousel__heading-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-style: {{ block.settings.heading_font.style }};
+    font-size: {{ block.settings.heading_size_desktop }}px;
+    line-height: 1.1;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+  }
+
+  .ai-hero-carousel__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 16px 48px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-hero-carousel__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-hero-carousel__nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    background-color: {{ block.settings.nav_background }};
+    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+  }
+
+  .ai-hero-carousel__nav-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-hero-carousel__nav-prev-{{ ai_gen_id }} {
+    left: 32px;
+  }
+
+  .ai-hero-carousel__nav-next-{{ ai_gen_id }} {
+    right: 32px;
+  }
+
+  .ai-hero-carousel__nav-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    stroke: {{ block.settings.nav_icon_color }};
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .ai-hero-carousel__pagination-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 12px;
+  }
+
+  .ai-hero-carousel__dot-{{ ai_gen_id }} {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: {{ block.settings.dot_color }};
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    padding: 0;
+  }
+
+  .ai-hero-carousel__dot-{{ ai_gen_id }}.active {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  .ai-hero-carousel__dot-{{ ai_gen_id }}:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-hero-carousel__slides-{{ ai_gen_id }} {
+      height: 70vh;
+      min-height: 400px;
+    }
+
+    .ai-hero-carousel__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_mobile }}px;
+      margin: 0 0 24px;
+    }
+
+    .ai-hero-carousel__button-{{ ai_gen_id }} {
+      padding: 14px 36px;
+      font-size: 14px;
+    }
+
+    .ai-hero-carousel__nav-{{ ai_gen_id }} {
+      width: 44px;
+      height: 44px;
+    }
+
+    .ai-hero-carousel__nav-prev-{{ ai_gen_id }} {
+      left: 16px;
+    }
+
+    .ai-hero-carousel__nav-next-{{ ai_gen_id }} {
+      right: 16px;
+    }
+
+    .ai-hero-carousel__pagination-{{ ai_gen_id }} {
+      bottom: 24px;
+    }
+
+    .ai-hero-carousel__dot-{{ ai_gen_id }} {
+      width: 10px;
+      height: 10px;
+    }
+  }
+{% endstyle %}
+
+<hero-carousel-{{ ai_gen_id }}
+  class="ai-hero-carousel-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-hero-carousel__slides-{{ ai_gen_id }}">
+    {% for i in (1..2) %}
+      {% liquid
+        assign slide_image_key = 'slide_' | append: i | append: '_image'
+        assign slide_heading_key = 'slide_' | append: i | append: '_heading'
+        assign slide_button_text_key = 'slide_' | append: i | append: '_button_text'
+        assign slide_button_link_key = 'slide_' | append: i | append: '_button_link'
+
+        assign slide_image = block.settings[slide_image_key]
+        assign slide_heading = block.settings[slide_heading_key]
+        assign slide_button_text = block.settings[slide_button_text_key]
+        assign slide_button_link = block.settings[slide_button_link_key]
+      %}
+
+      <div
+        class="ai-hero-carousel__slide-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+        data-slide="{{ forloop.index0 }}"
+      >
+        <div class="ai-hero-carousel__slide-image-{{ ai_gen_id }}">
+          {% if slide_image %}
+            <img
+              src="{{ slide_image | image_url: width: 2400 }}"
+              alt="{{ slide_image.alt | escape }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              width="{{ slide_image.width }}"
+              height="{{ slide_image.height }}"
+            >
+          {% else %}
+            <div class="ai-hero-carousel__placeholder-{{ ai_gen_id }}">
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+              <div class="ai-hero-carousel__empty-state-{{ ai_gen_id }}">
+                Add an image for slide {{ forloop.index }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="ai-hero-carousel__overlay-{{ ai_gen_id }}"></div>
+
+        <div class="ai-hero-carousel__content-{{ ai_gen_id }}">
+          {% if slide_heading != blank %}
+            <h1 class="ai-hero-carousel__heading-{{ ai_gen_id }}">{{ slide_heading }}</h1>
+          {% endif %}
+
+          {% if slide_button_text != blank %}
+            <a
+              href="{{ slide_button_link | default: '#' }}"
+              class="ai-hero-carousel__button-{{ ai_gen_id }}"
+            >
+              {{ slide_button_text }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <button
+    class="ai-hero-carousel__nav-{{ ai_gen_id }} ai-hero-carousel__nav-prev-{{ ai_gen_id }}"
+    aria-label="Previous slide"
+  >
+    <svg viewBox="0 0 24 24">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <button
+    class="ai-hero-carousel__nav-{{ ai_gen_id }} ai-hero-carousel__nav-next-{{ ai_gen_id }}"
+    aria-label="Next slide"
+  >
+    <svg viewBox="0 0 24 24">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="ai-hero-carousel__pagination-{{ ai_gen_id }}">
+    {% for i in (1..2) %}
+      <button
+        class="ai-hero-carousel__dot-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+        data-slide="{{ forloop.index0 }}"
+        aria-label="Go to slide {{ forloop.index }}"
+      ></button>
+    {% endfor %}
+  </div>
+</hero-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HeroCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentSlide = 0;
+        this.totalSlides = 2;
+        this.autoplayInterval = null;
+        this.isHovered = false;
+      }
+
+      connectedCallback() {
+        this.slides = this.querySelectorAll('.ai-hero-carousel__slide-{{ ai_gen_id }}');
+        this.dots = this.querySelectorAll('.ai-hero-carousel__dot-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-hero-carousel__nav-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-hero-carousel__nav-next-{{ ai_gen_id }}');
+        
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.autoplaySpeed = parseInt(this.dataset.autoplaySpeed) * 1000;
+
+        this.setupEventListeners();
+        
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      }
+
+      setupEventListeners() {
+        this.prevButton.addEventListener('click', () => this.goToPrevSlide());
+        this.nextButton.addEventListener('click', () => this.goToNextSlide());
+
+        this.dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        this.addEventListener('mouseenter', () => {
+          this.isHovered = true;
+          if (this.autoplay) {
+            this.stopAutoplay();
+          }
+        });
+
+        this.addEventListener('mouseleave', () => {
+          this.isHovered = false;
+          if (this.autoplay) {
+            this.startAutoplay();
+          }
+        });
+      }
+
+      goToSlide(index) {
+        this.slides[this.currentSlide].classList.remove('active');
+        this.dots[this.currentSlide].classList.remove('active');
+
+        this.currentSlide = index;
+
+        this.slides[this.currentSlide].classList.add('active');
+        this.dots[this.currentSlide].classList.add('active');
+      }
+
+      goToNextSlide() {
+        const nextSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.goToSlide(nextSlide);
+      }
+
+      goToPrevSlide() {
+        const prevSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.goToSlide(prevSlide);
+      }
+
+      startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+          if (!this.isHovered) {
+            this.goToNextSlide();
+          }
+        }, this.autoplaySpeed);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+      }
+    }
+
+    customElements.define('hero-carousel-{{ ai_gen_id }}', HeroCarousel{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Hero carousel",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slide 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_heading",
+      "label": "Heading",
+      "default": "Kingkhap Collection"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_button_text",
+      "label": "Button text",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "slide_1_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_heading",
+      "label": "Heading",
+      "default": "Handmade Stationery Collection"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_button_text",
+      "label": "Button text",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "slide_2_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Carousel settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "transition_duration",
+      "label": "Transition duration",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.5,
+      "unit": "s",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 0.8,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 32,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 24,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "color",
+      "id": "nav_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "nav_icon_color",
+      "label": "Arrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Pagination dot color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero carousel"
+    }
+  ]
+}
 {% endschema %}
