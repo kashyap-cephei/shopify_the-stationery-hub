@@ -1,6 +1,525 @@
+{% doc %}
+  @prompt
+    Create a premium "Featured Collections" section for a luxury stationery and lifestyle brand.
+    
+    Layout:
+    - Display 3 collection cards in a single horizontal row.
+    - Each card should have equal width.
+    - Small gap (16–24px) between cards.
+    - Full-width section with generous outer padding.
+    
+    Each Collection Card:
+    - Large portrait image covering the entire card.
+    - Image aspect ratio around 4:5.
+    - Image should use object-fit: cover.
+    - Add a subtle dark gradient overlay at the bottom for text readability.
+    
+    Overlay Content:
+    - Position content at the bottom center of the image.
+    - Collection title in a large elegant serif font, white color.
+    - Rounded white pill-shaped button below the title.
+    - Button text: EXPLORE
+    - Button text color: Black.
+    - Smooth hover animation on the button.
+    
+    Theme Settings:
+    - Allow up to 3 collection cards.
+    - Each card should have:
+      - Collection image
+      - Collection title
+      - Button text
+      - Button link
+    - Make all content editable from the Shopify Theme Editor.
+    
+    Responsive:
+    - Desktop: 3 columns.
+    - Tablet: 2 columns.
+    - Mobile: Single-column swipeable carousel.
+    
+    Style:
+    Luxury, editorial, handcrafted, premium, clean, minimal with generous white space and smooth hover transitions.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-collections-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 80px 40px;
+    background-color: {{ block.settings.section_background_color }};
+  }
+
+  .ai-featured-collections__container-{{ ai_gen_id }} {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ai-featured-collections__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .ai-featured-collections__card-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.card_border_radius }}px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .ai-featured-collections__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-featured-collections__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-featured-collections__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-featured-collections__placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  .ai-featured-collections__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}), transparent);
+    pointer-events: none;
+  }
+
+  .ai-featured-collections__content-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 2;
+  }
+
+  .ai-featured-collections__title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-style: {{ block.settings.title_font.style }};
+    font-size: {{ block.settings.title_size }}px;
+    line-height: 1.2;
+    color: {{ block.settings.title_color }};
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  .ai-featured-collections__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-featured-collections__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-featured-collections-{{ ai_gen_id }} {
+      padding: 60px 30px;
+    }
+
+    .ai-featured-collections__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: {{ block.settings.card_gap | times: 0.75 }}px;
+    }
+
+    .ai-featured-collections__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-featured-collections__content-{{ ai_gen_id }} {
+      padding: 30px 20px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-collections-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-featured-collections__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.card_gap | times: 0.5 }}px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .ai-featured-collections__grid-{{ ai_gen_id }}::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ai-featured-collections__card-{{ ai_gen_id }} {
+      scroll-snap-align: center;
+      min-width: 85vw;
+    }
+
+    .ai-featured-collections__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+
+    .ai-featured-collections__button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+      padding: 10px 28px;
+    }
+
+    .ai-featured-collections__content-{{ ai_gen_id }} {
+      padding: 25px 20px;
+      gap: 16px;
+    }
+  }
+{% endstyle %}
+
+<featured-collections-{{ ai_gen_id }} class="ai-featured-collections-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-featured-collections__container-{{ ai_gen_id }}">
+    <div class="ai-featured-collections__grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign collection_key = 'collection_' | append: i
+          assign title_key = 'collection_' | append: i | append: '_title'
+          assign button_text_key = 'collection_' | append: i | append: '_button_text'
+          assign button_link_key = 'collection_' | append: i | append: '_button_link'
+          assign image_key = 'collection_' | append: i | append: '_image'
+
+          assign collection_image = block.settings[image_key]
+          assign collection_title = block.settings[title_key]
+          assign button_text = block.settings[button_text_key]
+          assign button_link = block.settings[button_link_key]
+        %}
+
+        <div class="ai-featured-collections__card-{{ ai_gen_id }}">
+          <div class="ai-featured-collections__image-wrapper-{{ ai_gen_id }}">
+            {% if collection_image %}
+              <img
+                src="{{ collection_image | image_url: width: 800 }}"
+                alt="{{ collection_image.alt | escape }}"
+                loading="lazy"
+                width="{{ collection_image.width }}"
+                height="{{ collection_image.height }}"
+                class="ai-featured-collections__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-featured-collections__placeholder-{{ ai_gen_id }}">
+                {{ 'collection-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+            <div class="ai-featured-collections__overlay-{{ ai_gen_id }}"></div>
+          </div>
+
+          <div class="ai-featured-collections__content-{{ ai_gen_id }}">
+            {% if collection_title != blank %}
+              <h3 class="ai-featured-collections__title-{{ ai_gen_id }}">{{ collection_title }}</h3>
+            {% endif %}
+
+            {% if button_link != blank %}
+              <a href="{{ button_link }}" class="ai-featured-collections__button-{{ ai_gen_id }}">
+                {% if button_text != blank %}
+                  {{ button_text }}
+                {% else %}
+                  EXPLORE
+                {% endif %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</featured-collections-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeaturedCollections{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupMobileCarousel();
+      }
+
+      setupMobileCarousel() {
+        const grid = this.querySelector('.ai-featured-collections__grid-{{ ai_gen_id }}');
+        if (!grid) return;
+
+        if (window.innerWidth <= 749) {
+          let isDown = false;
+          let startX;
+          let scrollLeft;
+
+          grid.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - grid.offsetLeft;
+            scrollLeft = grid.scrollLeft;
+          });
+
+          grid.addEventListener('mouseleave', () => {
+            isDown = false;
+          });
+
+          grid.addEventListener('mouseup', () => {
+            isDown = false;
+          });
+
+          grid.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - grid.offsetLeft;
+            const walk = (x - startX) * 2;
+            grid.scrollLeft = scrollLeft - walk;
+          });
+        }
+      }
+    }
+
+    customElements.define('featured-collections-{{ ai_gen_id }}', FeaturedCollections{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Featured collections",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section style"
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Background color",
+      "default": "#FBF9F5"
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Gap between cards",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.6
+    },
+    {
+      "type": "header",
+      "content": "Collection title"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Font size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Hover background color",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Collection 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_1_title",
+      "label": "Title",
+      "default": "Premium Notebooks"
+    },
+    {
+      "type": "text",
+      "id": "collection_1_button_text",
+      "label": "Button text",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "url",
+      "id": "collection_1_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Collection 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_2_title",
+      "label": "Title",
+      "default": "Luxury Pens"
+    },
+    {
+      "type": "text",
+      "id": "collection_2_button_text",
+      "label": "Button text",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "url",
+      "id": "collection_2_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Collection 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_3_title",
+      "label": "Title",
+      "default": "Desk Accessories"
+    },
+    {
+      "type": "text",
+      "id": "collection_3_button_text",
+      "label": "Button text",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "url",
+      "id": "collection_3_button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collections"
+    }
+  ]
+}
 {% endschema %}
