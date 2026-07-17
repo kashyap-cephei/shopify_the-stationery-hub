@@ -1,6 +1,440 @@
+{% doc %}
+  @prompt
+    Create a premium Featured Category section.
+    
+    Display exactly ONE row with TWO category cards.
+    
+    Layout:
+    - 2 columns (50% / 50%)
+    - Configurable gap between cards (default 24px)
+    - Full-width section
+    
+    Each card should contain:
+    - One large clickable image
+    - Category title below the image
+    - Link to Collection, Page, or URL
+    
+    Theme Settings:
+    - Section heading
+    - Image height (default 850px, configurable)
+    - Card gap
+    - Top & bottom spacing
+    - Full width or page width
+    
+    Each card should allow:
+    - Image
+    - Title
+    - Link
+    
+    Style:
+    Minimal, luxury, editorial.
+    
+    Responsive:
+    - Desktop: 2 columns
+    - Tablet: 2 columns
+    - Mobile: 1 column
+    
+    Generate this as a Shopify section with editable blocks and Theme Editor settings.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-featured-category-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding-top: {{ block.settings.spacing_top }}px;
+    padding-bottom: {{ block.settings.spacing_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-featured-category-container-{{ ai_gen_id }} {
+    {% if block.settings.full_width %}
+      width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+    {% else %}
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    {% endif %}
+  }
+
+  .ai-featured-category-heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+    letter-spacing: 0.02em;
+  }
+
+  .ai-featured-category-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: {{ block.settings.card_gap }}px;
+  }
+
+  .ai-featured-category-card-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-featured-category-link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-featured-category-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .ai-featured-category-link-{{ ai_gen_id }}:hover .ai-featured-category-image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-featured-category-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-featured-category-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    opacity: 0.3;
+  }
+
+  .ai-featured-category-title-{{ ai_gen_id }} {
+    margin: 20px 0 0;
+    font-size: {{ block.settings.card_title_size }}px;
+    text-align: center;
+    color: {{ block.settings.card_title_color }};
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-featured-category-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height | times: 0.7 }}px;
+    }
+
+    .ai-featured-category-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-featured-category-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_title_size | times: 0.9 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-featured-category-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-featured-category-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.image_height | times: 0.6 }}px;
+    }
+
+    .ai-featured-category-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-featured-category-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.card_title_size | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<featured-category-{{ ai_gen_id }} class="ai-featured-category-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-featured-category-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-featured-category-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-featured-category-grid-{{ ai_gen_id }}">
+      <div class="ai-featured-category-card-{{ ai_gen_id }}">
+        {% if block.settings.card_1_link != blank %}
+          <a href="{{ block.settings.card_1_link }}" class="ai-featured-category-link-{{ ai_gen_id }}" aria-label="{{ block.settings.card_1_title | escape }}">
+        {% else %}
+          <div class="ai-featured-category-link-{{ ai_gen_id }}">
+        {% endif %}
+          <div class="ai-featured-category-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_1_image %}
+              <img
+                src="{{ block.settings.card_1_image | image_url: width: 1200 }}"
+                alt="{{ block.settings.card_1_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_1_image.width }}"
+                height="{{ block.settings.card_1_image.height }}"
+                class="ai-featured-category-image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-featured-category-image-placeholder-{{ ai_gen_id }}">
+                {{ 'collection-apparel-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          {% if block.settings.card_1_title != blank %}
+            <h3 class="ai-featured-category-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+          {% endif %}
+        {% if block.settings.card_1_link != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-featured-category-card-{{ ai_gen_id }}">
+        {% if block.settings.card_2_link != blank %}
+          <a href="{{ block.settings.card_2_link }}" class="ai-featured-category-link-{{ ai_gen_id }}" aria-label="{{ block.settings.card_2_title | escape }}">
+        {% else %}
+          <div class="ai-featured-category-link-{{ ai_gen_id }}">
+        {% endif %}
+          <div class="ai-featured-category-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.card_2_image %}
+              <img
+                src="{{ block.settings.card_2_image | image_url: width: 1200 }}"
+                alt="{{ block.settings.card_2_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.card_2_image.width }}"
+                height="{{ block.settings.card_2_image.height }}"
+                class="ai-featured-category-image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-featured-category-image-placeholder-{{ ai_gen_id }}">
+                {{ 'collection-apparel-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          {% if block.settings.card_2_title != blank %}
+            <h3 class="ai-featured-category-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+          {% endif %}
+        {% if block.settings.card_2_link != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</featured-category-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class FeaturedCategory{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        const links = this.querySelectorAll('.ai-featured-category-link-{{ ai_gen_id }}');
+        links.forEach(link => {
+          if (link.tagName === 'A' && !link.getAttribute('aria-label')) {
+            const title = link.querySelector('.ai-featured-category-title-{{ ai_gen_id }}');
+            if (title) {
+              link.setAttribute('aria-label', title.textContent.trim());
+            }
+          }
+        });
+      }
+    }
+
+    customElements.define('featured-category-{{ ai_gen_id }}', FeaturedCategory{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Featured category",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#2B2825"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "card_gap",
+      "label": "Card gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 850
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Title size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title color",
+      "default": "#2B2825"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FBF9F5"
+    },
+    {
+      "type": "header",
+      "content": "Card 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Title",
+      "default": "Category One"
+    },
+    {
+      "type": "url",
+      "id": "card_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Card 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Title",
+      "default": "Category Two"
+    },
+    {
+      "type": "url",
+      "id": "card_2_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured category"
+    }
+  ]
+}
 {% endschema %}
