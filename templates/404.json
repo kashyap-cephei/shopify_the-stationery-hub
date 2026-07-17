@@ -220,7 +220,7 @@
       "name": "Section -1",
       "settings": {
         "content_direction": "column",
-        "section_width": "page-width",
+        "section_width": "full-width",
         "section_height": "small",
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
