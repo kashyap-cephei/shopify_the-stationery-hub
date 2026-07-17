@@ -277,7 +277,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 20,
         "background_color": "#ffffff",
-        "padding-block-start": 100,
+        "padding-block-start": 0,
         "padding-block-end": 100
       }
     }
