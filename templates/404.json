@@ -12,6 +12,28 @@
     "main": {
       "type": "main-404",
       "blocks": {
+        "ai_gen_block_a6a5216_EwENzF": {
+          "type": "ai_gen_block_a6a5216",
+          "disabled": true,
+          "settings": {
+            "section_heading": "Explore our collections",
+            "heading_size": 40,
+            "heading_color": "#2b2825",
+            "image_height": 600,
+            "column_gap": 10,
+            "category_title_size": 24,
+            "category_title_color": "#2b2825",
+            "category_title_hover_color": "#c4a484",
+            "section_background_color": "#FFFFFF",
+            "category_1_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
+            "category_1_title": "Notebooks & Journals",
+            "category_1_link": "",
+            "category_2_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
+            "category_2_title": "Writing Instruments",
+            "category_2_link": ""
+          },
+          "blocks": {}
+        },
         "ai_gen_block_f4fc73e_WUQTwP": {
           "type": "ai_gen_block_f4fc73e",
           "settings": {
@@ -167,28 +189,6 @@
           },
           "blocks": {}
         },
-        "ai_gen_block_a6a5216_EwENzF": {
-          "type": "ai_gen_block_a6a5216",
-          "disabled": true,
-          "settings": {
-            "section_heading": "Explore our collections",
-            "heading_size": 40,
-            "heading_color": "#2b2825",
-            "image_height": 600,
-            "column_gap": 10,
-            "category_title_size": 24,
-            "category_title_color": "#2b2825",
-            "category_title_hover_color": "#c4a484",
-            "section_background_color": "#FFFFFF",
-            "category_1_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
-            "category_1_title": "Notebooks & Journals",
-            "category_1_link": "",
-            "category_2_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
-            "category_2_title": "Writing Instruments",
-            "category_2_link": ""
-          },
-          "blocks": {}
-        },
         "ai_gen_block_ed50b5a_8cFaVJ": {
           "type": "ai_gen_block_ed50b5a",
           "settings": {
@@ -203,7 +203,7 @@
             "card_title_color": "#2B2825",
             "spacing_top": 80,
             "spacing_bottom": 80,
-            "background_color": "#FBF9F5",
+            "background_color": "#FFFFFF",
             "card_1_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
             "card_1_title": "Category One",
             "card_1_link": "",
@@ -259,12 +259,12 @@
         }
       },
       "block_order": [
+        "ai_gen_block_a6a5216_EwENzF",
         "ai_gen_block_f4fc73e_WUQTwP",
         "ai_gen_block_0b444ac_eRdrKx",
         "ai_gen_block_822e36e_BBGfJw",
         "ai_gen_block_b11d142_4GnxiP",
         "ai_gen_block_b11d142_k3drBw",
-        "ai_gen_block_a6a5216_EwENzF",
         "ai_gen_block_ed50b5a_8cFaVJ",
         "ai_gen_block_6a4a389_BRd9Ak"
       ],
