@@ -188,6 +188,30 @@
           },
           "blocks": {}
         },
+        "ai_gen_block_ed50b5a_8cFaVJ": {
+          "type": "ai_gen_block_ed50b5a",
+          "settings": {
+            "heading": "Shop by Category",
+            "heading_size": 40,
+            "heading_color": "#2B2825",
+            "heading_spacing": 48,
+            "full_width": true,
+            "card_gap": 24,
+            "image_height": 850,
+            "card_title_size": 18,
+            "card_title_color": "#2B2825",
+            "spacing_top": 80,
+            "spacing_bottom": 80,
+            "background_color": "#FBF9F5",
+            "card_1_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
+            "card_1_title": "Category One",
+            "card_1_link": "",
+            "card_2_image": "shopify://shop_images/Gemini_Generated_Image_kbpy5lkbpy5lkbpy.png",
+            "card_2_title": "Category Two",
+            "card_2_link": ""
+          },
+          "blocks": {}
+        },
         "ai_gen_block_6a4a389_BRd9Ak": {
           "type": "ai_gen_block_6a4a389",
           "settings": {
@@ -240,6 +264,7 @@
         "ai_gen_block_b11d142_4GnxiP",
         "ai_gen_block_b11d142_k3drBw",
         "ai_gen_block_a6a5216_EwENzF",
+        "ai_gen_block_ed50b5a_8cFaVJ",
         "ai_gen_block_6a4a389_BRd9Ak"
       ],
       "name": "Section -1",
