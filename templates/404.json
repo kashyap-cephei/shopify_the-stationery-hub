@@ -169,6 +169,7 @@
         },
         "ai_gen_block_a6a5216_EwENzF": {
           "type": "ai_gen_block_a6a5216",
+          "disabled": true,
           "settings": {
             "section_heading": "Explore our collections",
             "heading_size": 40,
